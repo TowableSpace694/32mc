@@ -7,17 +7,15 @@
 
 ## 功能特性
 
-- 基于 ESP32-S3 + ST7735 的 3D 渲染
+- 基于 ESP32-S3 + ST7735(我使用的) 的 3D 渲染
 - 支持 Minecraft 登录流程（Handshake/Login/Configuration/Play）
 - 解析并应用服务端 `Chunk Data and Update Light`
 - 支持移动同步、切换手持物品、破坏方块、放置方块
 - 支持远程玩家可视化
-- 内置 Web 控制面板，可在浏览器改按键映射和联机参数
 
 ## 目录结构
 
 - `src/main.cpp`: 程序入口与主循环
-
 - `src/mc_client.cpp`: 网络协议收发与状态机
 - `src/render.cpp`: 体素渲染与 HUD
 - `src/controls.cpp`: 输入处理、相机与交互逻辑
@@ -28,7 +26,7 @@
 ## 硬件要求
 
 - ESP32-S3（`esp32-s3-devkitc-1`）
-- ST7735/ST7735S SPI 屏幕（160x128）
+- ST7735/ST7735S SPI 屏幕（160x128）(你也可以用你自己的 但是你需要改下代码里定义的引脚)
 
 ## 引脚定义（默认）
 
@@ -43,7 +41,7 @@
 - 左按钮: `GPIO39`
 - 右按钮: `GPIO40`
 
-如果你的板子接线不同，请修改 `include/game_shared.h`。
+如果你的板子接线不同，请修改 `include/game_shared.h`！！！！！！！！！！！
 
 ## 软件环境
 
@@ -90,6 +88,7 @@ pio device monitor -b 115200
 5. 打开 Web 控制面板
 - 设备连上 WiFi 后，在串口查看分配到的 IP
 - 浏览器访问 `http://<esp_ip>/`
+  （没按钮可以在这里通过网页来控制游戏）
 
 ## 默认按键（Web 键盘）
 
@@ -103,7 +102,7 @@ pio device monitor -b 115200
 - 物品栏切换: `Z/X` 或 `1..5`
 
 注意：
-- 当前本地离线世界编辑默认关闭（`kEnableLocalBlockEdit = false`）更改他后默认进入离线世界，如果不更改你需要准备一个服务端 1.21.8离线推荐使用本项目适配的 `bareiron` 服务端
+- 当前本地离线世界编辑默认关闭（`kEnableLocalBlockEdit = false`）更改他后默认进入离线世界，如果不更改你需要准备一个服务端 1.21.8离线推荐使用本项目适配的 `bareiron` 服务端！！！！
 
 ## Web Control
 
@@ -119,15 +118,16 @@ pio device monitor -b 115200
 ## 与服务端配套说明
 
 推荐搭配本仓库内 `bareiron-main` 使用。  
-当前实现面向 `bareiron` 的 1.21.8/协议 772 行为，针对 ESP32 做了窗口化与低带宽适配。
+当前实现面向 `bareiron` 的 1.21.8/协议 772 行为，针对 ESP32 做了窗口化与低带宽适配（对.)。
 
 ## 限制
 
 - 不是完整 Java 客户端，仅实现可玩子集
 - 本地世界窗口较小（`16 x 14 x 16`），依赖服务端中心区块流式更新
 - 渲染、碰撞、方块映射均是简化实现
-- Web 控制面板默认无鉴权，建议只在可信局域网使用
+- Web 控制面板默认无鉴权!!!!!
 
+## 超级快速部署方法！！！！
 
 您可以直接把这个项目的地址甩给 codex iflow claudecode codebuddy qoder gemini cli opencode 等ai让他给你刷写和部署
 
